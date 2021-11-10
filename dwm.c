@@ -1290,7 +1290,7 @@ quit(const Arg *arg)
 	/* kill child processes */
 	for (i = 0; i < autostart_len; i++) {
 		if (0 < autostart_pids[i]) {
-			kill(autostart_pids[i], SIGTERM);
+			kill(autostart_pids[i], SIGKILL);
 			waitpid(autostart_pids[i], NULL, 0);
 		}
 	}
