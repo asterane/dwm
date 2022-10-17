@@ -10,8 +10,8 @@ static const unsigned int gappov    = 10;       /* vert outer gap between window
 static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=9" };
-static const char dmenufont[]       = "monospace:size=9";
+static const char *fonts[]          = { "monospace:size=8" };
+static const char dmenufont[]       = "monospace:size=8";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -27,8 +27,9 @@ static const char *colors[][3]      = {
 
 static const char *const autostart[] = {
 	"gammastep", NULL,
+        "emacs", "--daemon", NULL,
         "sh", "-c", "while :; do ~/.config/dwm/dwmstatus.sh -; sleep 20; done", NULL,
-        "sh", "-c", "while :; do if [ $(date +%H) -lt 5 ]; then shutdown now; fi; sleep 600; done", NULL,
+        "sh", "-c", "while :; do if [ $(date +%H) -lt 5 ] && [ $(date +%w) -lt 6 ]; then shutdown now; fi; sleep 300; done", NULL,
 	NULL /* terminate */
 };
 
@@ -43,6 +44,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
         { "zoom",     NULL,       "zoom",     0,            1,           -1 },
+        { NULL,       NULL,       "Picture in picture", 0,  1,           -1 },
 };
 
 /* layout(s) */
@@ -118,7 +120,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { TERM, NULL };
 
 static const char *lockcmd[]  = { "slock", NULL };
-static const char *emacscmd[] = { "emacs", NULL };
+static const char *emacscmd[] = { "emacsopen", NULL };
 static const char *webcmd[]   = { "vivaldi-stable", NULL };
 static const char *htopcmd[]  = { TERM, "-e", "htop", NULL };
 
@@ -152,8 +154,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_k,      killclient,     {0} },
 	{ MODKEY,                       XK_semicolon, setlayout,   {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,             XK_semicolon, setlayout,   {.v = &layouts[1]} },
-	{ MODKEY|Mod1Mask,              XK_semicolon, setlayout,   {.v = &layouts[LENGTH(layouts) - 2]} },
+	{ MODKEY|Mod1Mask,              XK_semicolon, setlayout,   {.v = &layouts[1]} },
+	{ MODKEY|ShiftMask,             XK_semicolon, setlayout,   {.v = &layouts[LENGTH(layouts) - 2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_ampersand, view,        {.ui = ~0 } },
@@ -180,6 +182,8 @@ static Key keys[] = {
         { 0, XF86XK_AudioMute,         spawn, SHCMD("dunstify -a Vol -r 6969 -t 1000 \"Volume $(awk -F'[][]' '/Left:/ { print $4 }' <(amixer -D pulse sset Master toggle))\"")},
         { 0, XF86XK_MonBrightnessUp,   spawn, SHCMD("brightnessctl -d 'amdgpu_bl0' s 10%+ -d 'acpi_video0' s 10%+")},
         { 0, XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl -d 'amdgpu_bl0' s 10%- -d 'acpi_video0' s 10%-")},
+        { 0, XK_Print,                 spawn, SHCMD("scrot")},
+        { ShiftMask, XK_Print,         spawn, SHCMD("scrot -s")},
 };
 
 /* button definitions */
