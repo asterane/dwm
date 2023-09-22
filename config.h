@@ -29,7 +29,7 @@ static const char *const autostart[] = {
 	"gammastep", NULL,
         "emacs", "--daemon", NULL,
         "sh", "-c", "while :; do ~/.config/dwm/dwmstatus.sh -; sleep 20; done", NULL,
-        "sh", "-c", "while :; do if [ $(date +%H) -lt 5 ] && [ $(date +%w) -lt 6 ]; then shutdown now; fi; sleep 300; done", NULL,
+        //        "sh", "-c", "while :; do if [ $(date +%H) -lt 5 ] && [ $(date +%w) -lt 6 ]; then shutdown now; fi; sleep 300; done", NULL,
 	NULL /* terminate */
 };
 
@@ -120,6 +120,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { TERM, NULL };
 
 static const char *lockcmd[]  = { "slock", NULL };
+static const char *sleepcmd[] = { "systemctl", "suspend", NULL };
 static const char *emacscmd[] = { "emacsopen", NULL };
 static const char *webcmd[]   = { "vivaldi-stable", NULL };
 static const char *htopcmd[]  = { TERM, "-e", "htop", NULL };
@@ -131,6 +132,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_m,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_u,      spawn,          {.v = termcmd } },
         { MODKEY,                       XK_l,      spawn,          {.v = lockcmd } },
+        { MODKEY|Mod1Mask,              XK_l,      spawn,          {.v = sleepcmd } },
         { MODKEY,                       XK_e,      spawn,          {.v = emacscmd } },
         { MODKEY,                       XK_w,      spawn,          {.v = webcmd } },
         { MODKEY,                       XK_x,      spawn,          {.v = htopcmd } },
