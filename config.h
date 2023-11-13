@@ -27,6 +27,7 @@ static const char *colors[][3]      = {
 
 static const char *const autostart[] = {
 	"gammastep", NULL,
+        "keychain", "--quiet", "--noask", "--systemd", "id_rsa", NULL,
         "emacs", "--daemon", NULL,
         "sh", "-c", "while :; do ~/.config/dwm/dwmstatus.sh -; sleep 20; done", NULL,
         //        "sh", "-c", "while :; do if [ $(date +%H) -lt 5 ] && [ $(date +%w) -lt 6 ]; then shutdown now; fi; sleep 300; done", NULL,
@@ -182,8 +183,8 @@ static Key keys[] = {
         { 0, XF86XK_AudioRaiseVolume,  spawn, SHCMD("dunstify -a Vol -r 6969 -t 1000 $(awk -F'[][]' '/Left:/ { print $2 }' <(amixer -D pulse sset Master 5%+))")},
         { 0, XF86XK_AudioLowerVolume,  spawn, SHCMD("dunstify -a Vol -r 6969 -t 1000 $(awk -F'[][]' '/Left:/ { print $2 }' <(amixer -D pulse sset Master 5%-))")},
         { 0, XF86XK_AudioMute,         spawn, SHCMD("dunstify -a Vol -r 6969 -t 1000 \"Volume $(awk -F'[][]' '/Left:/ { print $4 }' <(amixer -D pulse sset Master toggle))\"")},
-        { 0, XF86XK_MonBrightnessUp,   spawn, SHCMD("brightnessctl -d 'amdgpu_bl0' s 10%+ -d 'acpi_video0' s 10%+")},
-        { 0, XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl -d 'amdgpu_bl0' s 10%- -d 'acpi_video0' s 10%-")},
+        { 0, XF86XK_MonBrightnessUp,   spawn, SHCMD("brightnessctl s 10%+")},
+        { 0, XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl s 10%-")},
         { 0, XK_Print,                 spawn, SHCMD("scrot")},
         { ShiftMask, XK_Print,         spawn, SHCMD("scrot -s")},
 };
