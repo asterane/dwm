@@ -1,13 +1,14 @@
-gluc=$(cat /tmp/my-bget-latest)
+gluc=$(cat /tmp/bgain-latest)
 date=$(date +'%a %b %d %H:%M')
-batt=$(cat /sys/class/power_supply/BAT1/capacity)
 stat=" $gluc | $date "
 
-if [ $batt -ne 100 ]
-then stat="$stat[$batt%]"
-fi
+# batt=$(cat /sys/class/power_supply/BAT1/capacity)
 
-if [ $(date +%H) -lt 5 ]
+# if [ $batt -ne 100 ]
+# then stat="$stat[$batt]"
+# fi
+
+if [ $(date +%H) -gt 21 ]
 then shutdown now
 fi
 

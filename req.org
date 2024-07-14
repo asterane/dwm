@@ -1,0 +1,28 @@
+#+TITLE: My dwm dependencies
+
+* Arch packages
+- alacritty
+- alsa-utils
+- dmenu
+- dunst
+- emacs
+- gammastep
+- hsetroot
+- htop
+- keychain
+- scrot
+- slock
+- vivaldi
+- xorg-xsetroot
+
+** Optional
+- brightnessctl
+
+* My scripts
+- emacsopen
+
+** Optional
+- displaycfg
+
+* My programs
+- bgain

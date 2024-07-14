@@ -1,5 +1,7 @@
 #! /bin/sh
 
-hsetroot -center ~/Pictures/iss.jpg &
-/usr/local/bin/displaycfg
+hsetroot -center ~/photos/iss.jpg &
+
+# displaycfg
+
 exec dwm
