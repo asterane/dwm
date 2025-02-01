@@ -184,8 +184,8 @@ static const Key keys[] = {
         { 0, XF86XK_AudioLowerVolume,  spawn, SHCMD("dunstify -a Vol -r 6969 -t 1000 $(awk -F'[][]' '/Left:/ { print $2 }' <(amixer -D pulse sset Master 5%-))")},
         { 0, XF86XK_AudioMute,         spawn, SHCMD("dunstify -a Vol -r 6969 -t 1000 \"Audio $(awk -F'[][]' '/Left:/ { print $4 }' <(amixer -D pulse sset Master toggle))\"")},
 
-        /* { 0, XF86XK_MonBrightnessUp,   spawn, SHCMD("brightnessctl s 10%+")}, */
-        /* { 0, XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl s 10%-")}, */
+        { 0, XF86XK_MonBrightnessUp,   spawn, SHCMD("brightnessctl s 10%+")},
+        { 0, XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl s 10%-")},
 
         { 0, XK_Print,                 spawn, SHCMD("scrot")},
         { ShiftMask, XK_Print,         spawn, SHCMD("scrot -s")},

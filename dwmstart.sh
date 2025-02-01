@@ -1,6 +1,6 @@
 #! /bin/sh
 
-hsetroot -center ~/photos/iss.jpg &
+hsetroot -center ~/Pictures/iss.jpg &
 
 # displaycfg
 
